@@ -1,9 +1,57 @@
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  color:#2a2a2a;
-  background:
-    radial-gradient(circle at 20% 10%, #fff1f6, transparent 40%),
-    radial-gradient(circle at 85% 20%, #ffffff, transparent 45%),
-    linear-gradient(120deg, #ffd1dc, #fff7fb);
+/* ENVELOPE */
+
+#envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  margin: 40px auto;
+  cursor: pointer;
+}
+
+.front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ff3b8d;
+  border-radius: 6px;
+  z-index: 3;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-top: 90px solid #ff1f6b;
+  transform-origin: top;
+  transition: 0.5s;
+  z-index: 4;
+}
+
+.letter {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background: #120717;
+  color: white;
+  top: 5%;
+  left: 5%;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  transform: translateY(100%);
+  transition: 0.5s;
+  z-index: 2;
+}
+
+/* OPEN STATE */
+
+#envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+#envelope.open .letter {
+  transform: translateY(0);
 }
