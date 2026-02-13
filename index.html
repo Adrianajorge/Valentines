@@ -1,32 +1,18 @@
-<div class="wrap">
+<div id="envelope" class="envelope">
+  <div class="front"></div>
 
-  <div class="card hero">
-
-    <h1>For You 🖤</h1>
-
-    <!-- ENVELOPE -->
-    <div id="envelope" class="closed">
-      
-      <div class="front"></div>
-      
-      <div class="letter">
-        <p>
-          My love,<br><br>
-          I made this website just for you.<br><br>
-          You are my favorite person, my peace, and my heart.<br><br>
-          Happy Valentine’s Day 🖤
-        </p>
-      </div>
-
-      <div class="flap"></div>
-
-    </div>
-
-    <div class="buttons">
-      <button class="btn" onclick="openEnvelope()">Open</button>
-      <button class="btn ghost" onclick="closeEnvelope()">Reset</button>
-    </div>
-
+  <div class="letter" id="letter">
+    <p>
+      My love,<br><br>
+      I made this website just for you.<br><br>
+      Happy Valentine’s Day 🖤
+    </p>
   </div>
 
+  <div class="flap"></div>
+</div>
+
+<div class="buttons">
+  <button class="btn" id="openBtn" type="button">Open</button>
+  <button class="btn ghost" id="resetBtn" type="button">Reset</button>
 </div>
