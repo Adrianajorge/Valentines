@@ -1,4 +1,24 @@
-<div class="envelope-wrapper">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You 🖤</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- hearts layer (does NOT block clicks) -->
+  <canvas id="hearts"></canvas>
+
+  <div class="wrap">
+    <header class="card hero">
+      <div class="pill">💌 A coded Valentine</div>
+      <h1>Happy Valentine’s Day, <span id="bfName">Babe</span> 🖤</h1>
+      <p class="sub">Tap the envelope to open it…</p>
+    </header>
+
+   <div class="envelope-wrapper">
 
   <div id="envelope" class="envelope">
 
@@ -19,4 +39,38 @@
   </div>
 
 </div>
+
+
+          <p id="letterText" class="letter-text"></p>
+
+          <div class="signature" id="sig">— Yours 🖤</div>
+        </div>
+
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+      </div>
+
+      <div class="row buttons">
+        <button class="btn" id="openBtn" type="button">Open</button>
+        <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+        <button class="btn ghost" id="moreHeartsBtn" type="button">More hearts</button>
+      </div>
+
+      <section class="mini card2" id="reasonsCard" hidden>
+        <h2>10 reasons I love you</h2>
+        <ol id="reasonsList"></ol>
+        <p class="tinyNote">P.S. This list can go forever.</p>
+      </section>
+
+      <div class="row">
+        <button class="linkBtn" id="reasonsBtn" type="button">Show the 10 reasons</button>
+      </div>
+    </main>
+
+    <footer class="footer">made with 🖤 + javascript</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
