@@ -55,3 +55,8 @@
 #envelope.open .letter {
   transform: translateY(0);
 }
+#hearts{
+  pointer-events:none;   /* <-- this is critical */
+}
+.wrap{ position:relative; z-index: 2; }
+#hearts{ position:fixed; inset:0; z-index:0; }
