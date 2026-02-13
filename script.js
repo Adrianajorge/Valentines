@@ -1,4 +1,4 @@
-// ===== PERSONALIZE =====
+// script.js
 const boyfriendName = "Babe";
 const message =
 `My love,
@@ -25,7 +25,6 @@ const reasons = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  // text
   document.getElementById("bfName").textContent = boyfriendName;
   document.getElementById("sig").textContent = signature;
 
@@ -50,9 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tick = () => {
       letterText.textContent += message[i] ?? "";
       i++;
-      if (i < message.length) {
-        typingTimer = setTimeout(tick, 18);
-      }
+      if (i < message.length) typingTimer = setTimeout(tick, 18);
     };
     tick();
   }
@@ -70,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   openBtn.addEventListener("click", openEnvelope);
   resetBtn.addEventListener("click", resetEnvelope);
+
   envelope.addEventListener("click", () => {
     envelope.classList.contains("open") ? resetEnvelope() : openEnvelope();
   });
@@ -86,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reasonsCard.scrollIntoView({behavior:"smooth", block:"start"});
   });
 
-  // ===== HEARTS =====
+  // ===== hearts canvas =====
   const canvas = document.getElementById("hearts");
   const ctx = canvas.getContext("2d");
   let W, H;
@@ -102,15 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function spawnHeart(x = Math.random()*W, y = H + 60){
     const size = (10 + Math.random()*16) * devicePixelRatio;
     const color = Math.random() < 0.5 ? "rgba(255,59,141,1)" : "rgba(168,85,255,1)";
-    return {
-      x, y,
-      vx: (-0.7 + Math.random()*1.4) * devicePixelRatio,
-      vy: (-1.8 - Math.random()*2.6) * devicePixelRatio,
-      size,
-      rot: Math.random()*Math.PI,
-      vr: (-0.07 + Math.random()*0.14),
-      a: 0.95,
-      color
+    return { x,y,size,color,
+      vx:(-0.7 + Math.random()*1.4)*devicePixelRatio,
+      vy:(-1.8 - Math.random()*2.6)*devicePixelRatio,
+      rot:Math.random()*Math.PI,
+      vr:(-0.07 + Math.random()*0.14),
+      a:0.95
     };
   }
 
@@ -127,13 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.bezierCurveTo(0, 0.8, 0.5, 0.55, 0.5, 0.1);
     ctx.bezierCurveTo(0.5, -0.3, 0, -0.3, 0, 0.3);
     ctx.closePath();
-
     ctx.restore();
   }
 
   function burst(n=24){
-    const cx = (window.innerWidth * devicePixelRatio)/2;
-    const cy = (window.innerHeight * devicePixelRatio)/2;
+    const cx = (window.innerWidth*devicePixelRatio)/2;
+    const cy = (window.innerHeight*devicePixelRatio)/2;
     for(let i=0;i<n;i++){
       hearts.push(spawnHeart(
         cx + (Math.random()*320 - 160) * devicePixelRatio,
@@ -164,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   moreHeartsBtn.addEventListener("click", () => burst(45));
-
   burst(10);
   loop();
 });
