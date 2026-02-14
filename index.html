@@ -1,63 +1,46 @@
-<!-- index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>For You 🖤</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Valentine Letter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-  <canvas id="hearts"></canvas>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Envelope Screen -->
+    <div id="envelope-container">
+      <img src="envelope.png" alt="Envelope" id="envelope" />
+      <p>♡ Letter for You ♡</p>
+    </div>
 
-  <div class="wrap">
-    <header class="glass">
-      <div class="pill">💌 A coded Valentine</div>
-      <h1>Happy Valentine’s Day, <span id="bfName">Babe</span> 🖤</h1>
-      <p class="sub">Tap the envelope to open it…</p>
-    </header>
+    <!-- Letter Screen -->
+    <div id="letter-container">
+      <div class="letter-window">
+        <h1 id="letter-title">Will you be my Valentine?</h1>
 
-    <main class="stage">
-      <!-- TikTok-style envelope -->
-      <div id="envelope" class="envelope" aria-label="Envelope">
-        <div class="env-base"></div>
+        <img src="cat_heart.gif" class="cat" id="letter-cat" />
 
-        <div class="letter">
-          <div class="letter-head">
-            <span class="seal">❤</span>
-            <div class="scribbles">
-              <span></span><span></span><span></span>
-            </div>
+        <div class="buttons" id="letter-buttons">
+          <img src="yes.png" class="btn yes-btn" alt="Yes" />
+
+          <div class="no-wrapper">
+            <img src="no.png" class="btn no-btn" alt="No" />
           </div>
-
-          <p id="letterText"></p>
-          <span class="sig" id="sig">— Adriana 🖤</span>
         </div>
 
-        <div class="fold left"></div>
-        <div class="fold right"></div>
-        <div class="fold bottom"></div>
-        <div class="fold top"></div>
+        <p id="final-text" class="final-text" style="display: none">
+          <strong>Valentine Date:</strong> Meow Restaurant at 7pm. Dress fancy!
+        </p>
       </div>
-
-      <div class="controls">
-        <button class="btn" id="openBtn" type="button">Open</button>
-        <button class="btn ghost" id="resetBtn" type="button">Reset</button>
-        <button class="btn ghost" id="moreHeartsBtn" type="button">More hearts</button>
-      </div>
-
-      <button class="chip" id="reasonsBtn" type="button">Show the 10 reasons</button>
-
-      <section class="reasons" id="reasonsCard" hidden>
-        <h2>10 reasons I love you</h2>
-        <ol id="reasonsList"></ol>
-      </section>
-
-      <footer class="footer">made with 🖤 + javascript</footer>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
