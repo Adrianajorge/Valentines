@@ -1,72 +1,68 @@
-// Elements
-const envelope = document.getElementById("envelope-container");
-const letter = document.getElementById("letter-container");
-const noBtn = document.querySelector(".no-btn");
-const yesBtn = document.querySelector(".btn[alt='Yes']");
+const yes = document.querySelector("#yes");
+const no = document.querySelector("#no");
+const gif = document.querySelector("#gif");
+const text = document.querySelector("#text");
+const vid = document.querySelector("video");
+let count = 2;
 
-const title = document.getElementById("letter-title");
-const catImg = document.getElementById("letter-cat");
-const buttons = document.getElementById("letter-buttons");
-const finalText = document.getElementById("final-text");
+const gifs = [
+  "../resources/cat-heart.gif",
+  "../resources/rusure.gif",
+  "../resources/3shocked-1.gif",
+  "../resources/4.crying.gif",
+  "../resources/5.crying.gif",
+  "../resources/idc.gif"
+];
 
-// Click Envelope
-
-envelope.addEventListener("click", () => {
-    envelope.style.display = "none";
-    letter.style.display = "flex";
-
-    setTimeout( () => {
-        document.querySelector(".letter-window").classList.add("open");
-    },50);
+// to load the gifs faster
+gifs.forEach(gifSrc => {
+  const img = new Image();
+  img.src = gifSrc;
 });
 
-// Logic to move the NO btn
-
-noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
-
-    const distance = Math.random() * (max - min) + min;
-    const angle = Math.random() * Math.PI * 2;
-
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    noBtn.style.transition = "transform 0.3s ease";
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+// changes for when NO button is clicked
+no.addEventListener("click", () => {
+  if (count == 2) {
+    gif.src = "../resources/rusure.gif";// gif credit: https://knowyourmeme.com/photos/2738959-mr-fresh-side-eye-cat
+    text.innerHTML = "You meant to press YES right?🤨";
+    yes.style.height = "65%";
+    yes.style.width = "60%";
+    no.style.width = "30%";
+    count++;
+  } else if (count == 3) {
+    gif.src = "../resources/3shocked-1.gif";// gif credit: https://tenor.com/view/tkthao219-peach-goma-gif-25008901
+    text.innerHTML = "Your hand must have slipped right?🥹";
+    yes.style.height = "70%";
+    yes.style.width = "70%";
+    no.style.width = "20%";
+    count++;
+  } else if (count == 4) {
+    gif.src = "../resources/4.crying.gif";// gif credit: https://tenor.com/view/cat-kitty-gif-25340141
+    text.innerHTML = "I'm gonna cry😭";
+    yes.style.height = "80%";
+    yes.style.width = "80%";
+    no.style.fontSize = "4vh";
+    no.style.width = "10%";
+    count++;
+  } else if (count == 5) {
+    gif.src = "../resources/5.crying.gif";// gif credit: https://tenor.com/view/cat-gif-10173437195524493032
+    text.innerHTML = "Pretty Please🥺😘";
+    yes.style.height = "90%";
+    yes.style.width = "96%";
+    no.style.display = "none";
+  }
 });
 
-// Logic to make YES btn to grow
-
-// let yesScale = 1;
-
-// yesBtn.style.position = "relative"
-// yesBtn.style.transformOrigin = "center center";
-// yesBtn.style.transition = "transform 0.3s ease";
-
-// noBtn.addEventListener("click", () => {
-//     yesScale += 2;
-
-//     if (yesBtn.style.position !== "fixed") {
-//         yesBtn.style.position = "fixed";
-//         yesBtn.style.top = "50%";
-//         yesBtn.style.left = "50%";
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }else{
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }
-// });
-
-// YES is clicked
-
-yesBtn.addEventListener("click", () => {
-    title.textContent = "Yippeeee!";
-
-    catImg.src = "cat_dance.gif";
-
-    document.querySelector(".letter-window").classList.add("final");
-
-    buttons.style.display = "none";
-
-    finalText.style.display = "block";
+// changes for when YES button is clicked
+yes.addEventListener("click", () => {
+  vid.style.display = "block";
+  gif.src = "../resources/idc.gif";// gif credit: https://tenor.com/view/peach-cat-kiss-animated-love-mwah-gif-25743978
+  text.innerHTML = "Knew it babe 😘";
+  yes.innerHTML = '<a href="https://www.instagram.com/loop.codes/">Message me</a>';// inside the " " put your social media profile link
+  yes.style.height = "90%";
+  yes.style.width = "96%";
+  no.style.display = "none";
+  setTimeout(() => {
+    vid.style.display = "none";
+  }, 9000);
 });
