@@ -1,163 +1,72 @@
-// script.js
-const boyfriendName = "Babe";
-const message =
-`My love,
+// Elements
+const envelope = document.getElementById("envelope-container");
+const letter = document.getElementById("letter-container");
+const noBtn = document.querySelector(".no-btn");
+const yesBtn = document.querySelector(".btn[alt='Yes']");
 
-I made this website just for you.
+const title = document.getElementById("letter-title");
+const catImg = document.getElementById("letter-cat");
+const buttons = document.getElementById("letter-buttons");
+const finalText = document.getElementById("final-text");
 
-You are my safe place, my happiness, and my heart.
+// Click Envelope
 
-Happy Valentine’s Day 🖤`;
+envelope.addEventListener("click", () => {
+    envelope.style.display = "none";
+    letter.style.display = "flex";
 
-const signature = "— Adriana 🖤";
+    setTimeout( () => {
+        document.querySelector(".letter-window").classList.add("open");
+    },50);
+});
 
-const reasons = [
-  "You make me feel safe.",
-  "You make me laugh.",
-  "You always show up for me.",
-  "You listen to me.",
-  "You’re patient with me.",
-  "You motivate me.",
-  "You’re my favorite person to talk to.",
-  "You make life feel softer.",
-  "You love me the way I need.",
-  "You’re you — and I adore you."
-];
+// Logic to move the NO btn
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("bfName").textContent = boyfriendName;
-  document.getElementById("sig").textContent = signature;
+noBtn.addEventListener("mouseover", () => {
+    const min = 200;
+    const max = 200;
 
-  const envelope = document.getElementById("envelope");
-  const openBtn = document.getElementById("openBtn");
-  const resetBtn = document.getElementById("resetBtn");
-  const moreHeartsBtn = document.getElementById("moreHeartsBtn");
+    const distance = Math.random() * (max - min) + min;
+    const angle = Math.random() * Math.PI * 2;
 
-  const letterText = document.getElementById("letterText");
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
 
-  const reasonsBtn = document.getElementById("reasonsBtn");
-  const reasonsCard = document.getElementById("reasonsCard");
-  const reasonsList = document.getElementById("reasonsList");
+    noBtn.style.transition = "transform 0.3s ease";
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
 
-  let typingTimer = null;
+// Logic to make YES btn to grow
 
-  function typeMessage(){
-    if (typingTimer) clearTimeout(typingTimer);
-    letterText.textContent = "";
-    let i = 0;
+// let yesScale = 1;
 
-    const tick = () => {
-      letterText.textContent += message[i] ?? "";
-      i++;
-      if (i < message.length) typingTimer = setTimeout(tick, 18);
-    };
-    tick();
-  }
+// yesBtn.style.position = "relative"
+// yesBtn.style.transformOrigin = "center center";
+// yesBtn.style.transition = "transform 0.3s ease";
 
-  function openEnvelope(){
-    envelope.classList.add("open");
-    typeMessage();
-    burst(24);
-  }
+// noBtn.addEventListener("click", () => {
+//     yesScale += 2;
 
-  function resetEnvelope(){
-    envelope.classList.remove("open");
-    letterText.textContent = "";
-  }
+//     if (yesBtn.style.position !== "fixed") {
+//         yesBtn.style.position = "fixed";
+//         yesBtn.style.top = "50%";
+//         yesBtn.style.left = "50%";
+//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+//     }else{
+//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+//     }
+// });
 
-  openBtn.addEventListener("click", openEnvelope);
-  resetBtn.addEventListener("click", resetEnvelope);
+// YES is clicked
 
-  envelope.addEventListener("click", () => {
-    envelope.classList.contains("open") ? resetEnvelope() : openEnvelope();
-  });
+yesBtn.addEventListener("click", () => {
+    title.textContent = "Yippeeee!";
 
-  reasonsBtn.addEventListener("click", () => {
-    reasonsCard.hidden = false;
-    reasonsList.innerHTML = "";
-    reasons.forEach(r => {
-      const li = document.createElement("li");
-      li.textContent = r;
-      reasonsList.appendChild(li);
-    });
-    burst(12);
-    reasonsCard.scrollIntoView({behavior:"smooth", block:"start"});
-  });
+    catImg.src = "cat_dance.gif";
 
-  // ===== hearts canvas =====
-  const canvas = document.getElementById("hearts");
-  const ctx = canvas.getContext("2d");
-  let W, H;
-  let hearts = [];
+    document.querySelector(".letter-window").classList.add("final");
 
-  function resize(){
-    W = canvas.width = window.innerWidth * devicePixelRatio;
-    H = canvas.height = window.innerHeight * devicePixelRatio;
-  }
-  window.addEventListener("resize", resize);
-  resize();
+    buttons.style.display = "none";
 
-  function spawnHeart(x = Math.random()*W, y = H + 60){
-    const size = (10 + Math.random()*16) * devicePixelRatio;
-    const color = Math.random() < 0.5 ? "rgba(255,59,141,1)" : "rgba(168,85,255,1)";
-    return { x,y,size,color,
-      vx:(-0.7 + Math.random()*1.4)*devicePixelRatio,
-      vy:(-1.8 - Math.random()*2.6)*devicePixelRatio,
-      rot:Math.random()*Math.PI,
-      vr:(-0.07 + Math.random()*0.14),
-      a:0.95
-    };
-  }
-
-  function drawHeart(h){
-    ctx.save();
-    ctx.translate(h.x, h.y);
-    ctx.rotate(h.rot);
-    ctx.scale(h.size/120, h.size/120);
-
-    ctx.beginPath();
-    ctx.moveTo(0, 0.3);
-    ctx.bezierCurveTo(0, -0.3, -0.5, -0.3, -0.5, 0.1);
-    ctx.bezierCurveTo(-0.5, 0.55, 0, 0.8, 0, 1);
-    ctx.bezierCurveTo(0, 0.8, 0.5, 0.55, 0.5, 0.1);
-    ctx.bezierCurveTo(0.5, -0.3, 0, -0.3, 0, 0.3);
-    ctx.closePath();
-    ctx.restore();
-  }
-
-  function burst(n=24){
-    const cx = (window.innerWidth*devicePixelRatio)/2;
-    const cy = (window.innerHeight*devicePixelRatio)/2;
-    for(let i=0;i<n;i++){
-      hearts.push(spawnHeart(
-        cx + (Math.random()*320 - 160) * devicePixelRatio,
-        cy + (Math.random()*160 - 80) * devicePixelRatio
-      ));
-    }
-  }
-
-  function loop(){
-    ctx.clearRect(0,0,W,H);
-    if (Math.random() < 0.16) hearts.push(spawnHeart());
-
-    hearts.forEach(h => {
-      h.x += h.vx;
-      h.y += h.vy;
-      h.rot += h.vr;
-      h.a -= 0.0036;
-
-      ctx.globalAlpha = Math.max(0, h.a);
-      ctx.fillStyle = h.color;
-      drawHeart(h);
-      ctx.fill();
-    });
-
-    hearts = hearts.filter(h => h.a > 0 && h.y > -80*devicePixelRatio);
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(loop);
-  }
-
-  moreHeartsBtn.addEventListener("click", () => burst(45));
-  burst(10);
-  loop();
+    finalText.style.display = "block";
 });
